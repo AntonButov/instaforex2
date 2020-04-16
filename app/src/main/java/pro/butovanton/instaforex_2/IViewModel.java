@@ -10,15 +10,17 @@ import java.util.List;
 
 public class IViewModel extends AndroidViewModel {
 
-    private final String login, password;
-    private LiveData<List<Signal>> mAllWords;
+    private String login, password;
+    private LiveData<List<Signal>> signals;
     private Application application;
 
-    public IViewModel(@NonNull Application application, String login, String password) {
+    public IViewModel(@NonNull Application application) {
         super(application);
         this.application = application;
+    }
+
+    public void setLogin(String login, String password) {
         this.login = login;
         this.password = password;
     }
-
 }
