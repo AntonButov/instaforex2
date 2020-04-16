@@ -103,14 +103,6 @@ public class Api {
         return signals;
     }
 
-    public List<Signal> getActualSignals(List<Signal> signals) {
-        List<Signal> signalsActual = new ArrayList<>();
-        int sizeSignals = signals.size() - 1;
-        for (int i = 0 ; i < 7; i ++)
-            signalsActual.add(signals.get(sizeSignals - i));
-        return signalsActual;
-    }
-
 }
 
 

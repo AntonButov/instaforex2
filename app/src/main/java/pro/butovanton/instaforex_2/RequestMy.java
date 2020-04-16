@@ -11,5 +11,13 @@ public class RequestMy {
 
     String Login;
     String Password;
+
+    public void setLogin(String login) {
+        Login = login;
+    }
+
+    public void setPassword(String password) {
+        Password = password;
+    }
 }
 
