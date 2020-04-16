@@ -9,7 +9,7 @@ public class RequestMy {
 
     }
 
-    String Login = "20234561";
-    String Password = "ladevi31";
+    String Login;
+    String Password;
 }
 

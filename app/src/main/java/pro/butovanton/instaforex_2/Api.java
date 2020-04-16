@@ -57,7 +57,7 @@ public class Api {
    return token;
    }
 
-   public LiveData<List<Signal>> getAnaliticsAsinh(String token) {
+   public LiveData<List<Signal>> getAnaliticsAsinh(final String token) {
        new AsyncTask<Void, Void, List<Signal>>() {
            @Override
            protected List<Signal> doInBackground(Void... voids) {
