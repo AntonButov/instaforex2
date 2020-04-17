@@ -5,10 +5,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class RequestMy {
 
-    public RequestMy() {
-
-    }
-
     String Login;
     String Password;
 

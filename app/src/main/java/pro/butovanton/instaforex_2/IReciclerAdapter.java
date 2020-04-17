@@ -50,9 +50,7 @@ public class IReciclerAdapter extends RecyclerView.Adapter<IReciclerAdapter.IVie
 
 
     public class IViewHolder extends RecyclerView.ViewHolder {
-
         private TextView textView;
-
         public IViewHolder(@NonNull View itemView) {
             super(itemView);
             textView = itemView.findViewById(R.id.textView);
