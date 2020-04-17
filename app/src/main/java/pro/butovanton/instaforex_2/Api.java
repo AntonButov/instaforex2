@@ -34,7 +34,8 @@ public class Api {
     private MutableLiveData<List<Signal>> signals;
 
     public Api() {
-        pairs.add("EURUSD"); pairs.add("GBPUSD"); pairs.add("USDJPY"); pairs.add("USDCHF"); pairs.add("USDCAD"); pairs.add("AUDUSD"); pairs.add("NZDUSD");
+        pairs.add("EURUSD"); pairs.add("GBPUSD"); pairs.add("USDJPY"); pairs.add("USDCHF");
+        pairs.add("USDCAD"); pairs.add("AUDUSD"); pairs.add("NZDUSD");
         networkService = NetworkService.getInstance();
         jsonPlaceHolderApi = networkService.getJSONApi();
         token = new MutableLiveData<>();
@@ -46,7 +47,7 @@ public class Api {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                     String str = response.body();
-                    token.setValue(response.body());
+                    token.setValue(str);
                      }
 
             @Override
@@ -57,7 +58,7 @@ public class Api {
    return token;
    }
 
-   public LiveData<List<Signal>> getAnaliticsAsinh(final String token) {
+   public LiveData<List<Signal>> getAnaliticsAsinh(final String token, final String login) {
        new AsyncTask<Void, Void, List<Signal>>() {
            @Override
            protected List<Signal> doInBackground(Void... voids) {
@@ -65,7 +66,7 @@ public class Api {
                for (String pair : pairs) {
                    int now = (int) (System.currentTimeMillis() / 1000L);
                    try {
-                       List<Signal> signalsall = jsonPlaceHolderApi.getAnaliticSignal(token, 3, pair, now - 20 * DAY, now ).execute().body();
+                       List<Signal> signalsall = jsonPlaceHolderApi.getAnaliticSignal(token, login,3, pair, now - 20 * DAY, now ).execute().body();
                        Signal signal = signalsall.get(signalsall.size()-1);
                        signals.add(signal);
                        Log.d("DEBUG", "pair: " + signal.pair);
@@ -84,25 +85,6 @@ public class Api {
        }.execute();
         return signals;
    }
-
-    public LiveData<List<Signal>>  getAnalitic(String token) {
-        int now = (int) (System.currentTimeMillis() / 1000L);
-        jsonPlaceHolderApi.getAnaliticSignal(token, 3,"EURUSD,GBPUSD,USDJPY,USDCHF,USDCAD,AUDUSD,NZDUSD", now - 20* DAY, now).enqueue(new Callback<List<Signal>>() {
-            @Override
-            public void onResponse(Call<List<Signal>> call, Response<List<Signal>> response) {
-                if (response.isSuccessful()) {
-                   signals.setValue(response.body());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Signal>> call, Throwable t) {
-
-            }
-        });
-        return signals;
-    }
-
 }
 
 

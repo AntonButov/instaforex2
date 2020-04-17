@@ -24,7 +24,8 @@ public interface JSONPlaceHolderApi {
     @POST("api/Authentication/RequestMoblieCabinetApiToken")
     Call<String> putLogin(@Body RequestMy requestMy);
 
-    @GET("clientmobile/GetAnalyticSignals/20234561")
-    Call<List<Signal>> getAnaliticSignal(@Header("passkey") String token,@Query("tradingsystem") int system, @Query("pairs") String piars, @Query("from") int from, @Query("to") int to);
-
+    @GET("clientmobile/GetAnalyticSignals/{login}")
+    Call<List<Signal>> getAnaliticSignal(@Header("passkey") String token,@Path("login") String login,
+                                         @Query("tradingsystem") int system, @Query("pairs") String piars,
+                                         @Query("from") int from, @Query("to") int to);
 }

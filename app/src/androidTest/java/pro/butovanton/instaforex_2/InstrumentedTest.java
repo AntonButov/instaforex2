@@ -69,7 +69,7 @@ public class InstrumentedTest {
     public void getAnaliticAsinch() throws InterruptedException {
         CountDownLatch count = new CountDownLatch(1);
         String token = tokenClass.loadToken();
-        api.getAnaliticsAsinh(token).observeForever(new Observer<List<Signal>>() {
+        api.getAnaliticsAsinh(token, "20234561").observeForever(new Observer<List<Signal>>() {
             @Override
             public void onChanged(List<Signal> signals) {
                 assertTrue(signals.size() == 7);
