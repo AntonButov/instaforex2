@@ -53,14 +53,17 @@ public class Api {
            @Override
            protected Void doInBackground(Void... voids) {
                List<Signal> signalsRes = new ArrayList<>();
+               List<Signal> signalsall;
                for (String pair : pairs) {
                    int now = (int) (System.currentTimeMillis() / 1000L);
                    try {
-                       List<Signal> signalsall = jsonPlaceHolderApi.getAnaliticSignal(token, login,3, pair, now - 20 * DAY, now ).execute().body();
-                       Signal signal = signalsall.get(signalsall.size()-1);
-                       signalsRes.add(signal);
-                       Log.d("DEBUG", "pair: " + signal.pair);
-                       signals.postValue(signalsRes);
+                       signalsall = jsonPlaceHolderApi.getAnaliticSignal(token, login,3, pair, now - 20 * DAY, now ).execute().body();
+                       if (signalsall != null) {
+                           Signal signal = signalsall.get(signalsall.size() - 1);
+                           signalsRes.add(signal);
+                           Log.d("DEBUG", "pair: " + signal.pair);
+                           signals.postValue(signalsRes);
+                       }
                    } catch (IOException e) {
                        e.printStackTrace();
                    }

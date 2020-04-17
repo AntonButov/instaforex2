@@ -32,15 +32,18 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         viewModel = ViewModelProviders.of(this).get(IViewModel.class);
-        viewModel.getSignals().observe( this, new Observer<List<Signal>>() {
-            @Override
-            public void onChanged(List<Signal> signals) {
-                adapter.setSignals(signals);
-            }
-        });
 
-        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-        startActivityForResult(intent, LOGIN_ACTIVITY_REQUEST_CODE);
+            viewModel.getSignals().observe(this, new Observer<List<Signal>>() {
+                @Override
+                public void onChanged(List<Signal> signals) {
+                    adapter.setSignals(signals);
+                }
+            });
+
+        if (viewModel.getLogin() == null) {
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivityForResult(intent, LOGIN_ACTIVITY_REQUEST_CODE);
+        }
     }
 
     @Override

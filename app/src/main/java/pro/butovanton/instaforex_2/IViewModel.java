@@ -24,10 +24,10 @@ public class IViewModel extends AndroidViewModel {
         tokenClass = new TokenClass(application);
         api = new Api();
         requestMy = new RequestMy();
+        signals = new MutableLiveData<>();
     }
 
     public LiveData<List<Signal>> getSignals() {
-        signals = new MutableLiveData<>();
     return signals;
     }
 
@@ -46,6 +46,10 @@ public class IViewModel extends AndroidViewModel {
             token = tokenClass.loadToken();
             responseSignals(token);
         }
+    }
+
+    public String getLogin() {
+        return requestMy.getLogin();
     }
 
     private void responseSignals(String token) {
