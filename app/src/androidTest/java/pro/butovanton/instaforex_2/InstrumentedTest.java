@@ -34,17 +34,15 @@ public class InstrumentedTest {
     @Rule
     public InstantTaskExecutorRule instantTaskExecutorRule = new InstantTaskExecutorRule();
 
-    @Test
-    public void isTokenVolid() {
-        assertTrue(tokenClass.isTokenValid());
-    }
-
     String  token = "";
 
     @Test
     public void Api_getToken() {
         CountDownLatch countDownLatch = new CountDownLatch(1);
-        api.getToken(new RequestMy()).observeForever(new Observer<String>() {
+        RequestMy requestMy = new RequestMy();
+        requestMy.setLogin("20234561");
+        requestMy.setPassword("ladevi31");
+        api.getToken(requestMy).observeForever(new Observer<String>() {
             @Override
             public void onChanged(String responce) {
                 token = responce;
@@ -60,6 +58,11 @@ public class InstrumentedTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    public void isTokenVolid() {
+        assertTrue(tokenClass.isTokenValid());
     }
 
     @Test

@@ -65,7 +65,7 @@ public class Api {
                for (String pair : pairs) {
                    int now = (int) (System.currentTimeMillis() / 1000L);
                    try {
-                       List<Signal> signalsall = jsonPlaceHolderApi.getAnaliticSignal(token, pair, now - 20 * DAY, now ).execute().body();
+                       List<Signal> signalsall = jsonPlaceHolderApi.getAnaliticSignal(token, 3, pair, now - 20 * DAY, now ).execute().body();
                        Signal signal = signalsall.get(signalsall.size()-1);
                        signals.add(signal);
                        Log.d("DEBUG", "pair: " + signal.pair);
@@ -87,7 +87,7 @@ public class Api {
 
     public LiveData<List<Signal>>  getAnalitic(String token) {
         int now = (int) (System.currentTimeMillis() / 1000L);
-        jsonPlaceHolderApi.getAnaliticSignal(token, "EURUSD,GBPUSD,USDJPY,USDCHF,USDCAD,AUDUSD,NZDUSD", now - 20* DAY, now).enqueue(new Callback<List<Signal>>() {
+        jsonPlaceHolderApi.getAnaliticSignal(token, 3,"EURUSD,GBPUSD,USDJPY,USDCHF,USDCAD,AUDUSD,NZDUSD", now - 20* DAY, now).enqueue(new Callback<List<Signal>>() {
             @Override
             public void onResponse(Call<List<Signal>> call, Response<List<Signal>> response) {
                 if (response.isSuccessful()) {

@@ -19,7 +19,7 @@ public boolean isTokenValid () {
    return time - tokenTime < TIMEOK;
 }
 
-public Long loadTokenTime() {
+private Long loadTokenTime() {
     Long tokenTime;
     tokenTime = msharedPreferences.getLong("tokenTime", 0);
     return  tokenTime;
