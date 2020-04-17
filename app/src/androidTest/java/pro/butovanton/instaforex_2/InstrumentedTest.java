@@ -34,9 +34,7 @@ public class InstrumentedTest {
     @Test
     public void Api_getToken() {
         CountDownLatch countDownLatch = new CountDownLatch(1);
-        RequestMy requestMy = new RequestMy();
-        requestMy.setLogin("20234561");
-        requestMy.setPassword("ladevi31");
+        RequestMy requestMy = new RequestMy("20234561","ladevi31");
         api.getToken(requestMy).observeForever(new Observer<String>() {
             @Override
             public void onChanged(String responce) {

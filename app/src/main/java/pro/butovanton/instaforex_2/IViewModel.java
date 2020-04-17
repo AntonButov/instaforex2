@@ -23,8 +23,8 @@ public class IViewModel extends AndroidViewModel {
         super(application);
         tokenClass = new TokenClass(application);
         api = new Api();
-        requestMy = new RequestMy();
         signals = new MutableLiveData<>();
+        requestMy = new RequestMy(null, null);
     }
 
     public LiveData<List<Signal>> getSignals() {
@@ -43,7 +43,8 @@ public class IViewModel extends AndroidViewModel {
                 @Override
                 public void onChanged(String tokenReponse) {
                     token = tokenReponse;
-                    responseSignals(token);
+                    if (token != null)
+                       responseSignals(token);
                 }
             });
         else {
