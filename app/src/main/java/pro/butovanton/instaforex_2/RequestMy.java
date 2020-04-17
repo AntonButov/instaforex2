@@ -16,6 +16,10 @@ public class RequestMy {
         Login = login;
     }
 
+    public String getLogin() {
+        return Login;
+    }
+
     public void setPassword(String password) {
         Password = password;
     }

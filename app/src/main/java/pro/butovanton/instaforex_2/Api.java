@@ -59,30 +59,27 @@ public class Api {
    }
 
    public LiveData<List<Signal>> getAnaliticsAsinh(final String token, final String login) {
-       new AsyncTask<Void, Void, List<Signal>>() {
+       new AsyncTask<Void, Void, Void>() {
            @Override
-           protected List<Signal> doInBackground(Void... voids) {
-               List<Signal> signals = new ArrayList<>();
+           protected Void doInBackground(Void... voids) {
+               List<Signal> signalsRes = new ArrayList<>();
                for (String pair : pairs) {
                    int now = (int) (System.currentTimeMillis() / 1000L);
                    try {
                        List<Signal> signalsall = jsonPlaceHolderApi.getAnaliticSignal(token, login,3, pair, now - 20 * DAY, now ).execute().body();
                        Signal signal = signalsall.get(signalsall.size()-1);
-                       signals.add(signal);
+                       signalsRes.add(signal);
                        Log.d("DEBUG", "pair: " + signal.pair);
+                       signals.postValue(signalsRes);
                    } catch (IOException e) {
                        e.printStackTrace();
                    }
                }
-               return signals;
+               return null;
            }
+       }.execute(null,null,null);
 
-           @Override
-           protected void onPostExecute(List<Signal> signalss) {
-               super.onPostExecute(signalss);
-               signals.setValue(signalss);
-           }
-       }.execute();
+
         return signals;
    }
 }
