@@ -17,8 +17,6 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private static final int LOGIN_ACTIVITY_REQUEST_CODE = 1;
-    private RecyclerView recyclerView;
-    private IReciclerAdapter adapter;
     private IViewModel viewModel;
 
     @Override
@@ -27,13 +25,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
-        adapter = new IReciclerAdapter(this);
+        IReciclerAdapter adapter = new IReciclerAdapter(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
         viewModel = ViewModelProviders.of(this).get(IViewModel.class);
-
-            viewModel.getSignals().observe(this, new Observer<List<Signal>>() {
+        viewModel.getSignals().observe(this, new Observer<List<Signal>>() {
                 @Override
                 public void onChanged(List<Signal> signals) {
                     adapter.setSignals(signals);
@@ -49,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (requestCode == LOGIN_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
             String login = data.getStringExtra("login");
             String password = data.getStringExtra("password");

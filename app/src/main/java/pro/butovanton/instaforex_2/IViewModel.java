@@ -34,6 +34,10 @@ public class IViewModel extends AndroidViewModel {
     public void setLogin(String login, String password) {
         requestMy.setLogin(login);
         requestMy.setPassword(password);
+        loadSignals();
+    }
+
+    private void loadSignals() {
         if (!tokenClass.isTokenValid())
             api.getToken(requestMy).observeForever(new Observer<String>() {
                 @Override
@@ -48,10 +52,6 @@ public class IViewModel extends AndroidViewModel {
         }
     }
 
-    public String getLogin() {
-        return requestMy.getLogin();
-    }
-
     private void responseSignals(String token) {
         api.getAnaliticsAsinh(token, requestMy.getLogin()).observeForever(new Observer<List<Signal>>() {
             @Override
@@ -60,4 +60,9 @@ public class IViewModel extends AndroidViewModel {
             }
         });
     }
+
+    public String getLogin() {
+        return requestMy.getLogin();
+    }
+
 }

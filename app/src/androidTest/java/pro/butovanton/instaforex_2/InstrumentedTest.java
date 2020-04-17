@@ -19,11 +19,6 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.*;
 
-/**
- * Instrumented test, which will execute on an Android device.
- *
- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
- */
 @RunWith(AndroidJUnit4.class)
 public class InstrumentedTest {
 
@@ -67,12 +62,12 @@ public class InstrumentedTest {
 
     @Test
     public void getAnaliticAsinch() throws InterruptedException {
-        CountDownLatch count = new CountDownLatch(1);
+        CountDownLatch count = new CountDownLatch(7);
         String token = tokenClass.loadToken();
         api.getAnaliticsAsinh(token, "20234561").observeForever(new Observer<List<Signal>>() {
             @Override
             public void onChanged(List<Signal> signals) {
-                assertTrue(signals.size() == 7);
+                assertNotNull(signals);
                 count.countDown();
             }
         });

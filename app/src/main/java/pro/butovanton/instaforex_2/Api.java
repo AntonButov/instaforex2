@@ -15,7 +15,6 @@ import retrofit2.Response;
 public class Api {
 
     final int DAY = 86400;
-
     final List<String> pairs = new ArrayList<>();
 
     private NetworkService networkService;
@@ -54,8 +53,8 @@ public class Api {
            protected Void doInBackground(Void... voids) {
                List<Signal> signalsRes = new ArrayList<>();
                List<Signal> signalsall;
+               int now = (int) (System.currentTimeMillis() / 1000L);
                for (String pair : pairs) {
-                   int now = (int) (System.currentTimeMillis() / 1000L);
                    try {
                        signalsall = jsonPlaceHolderApi.getAnaliticSignal(token, login,3, pair, now - 20 * DAY, now ).execute().body();
                        if (signalsall != null) {
@@ -71,8 +70,6 @@ public class Api {
                return null;
            }
        }.execute(null,null,null);
-
-
         return signals;
    }
 }
