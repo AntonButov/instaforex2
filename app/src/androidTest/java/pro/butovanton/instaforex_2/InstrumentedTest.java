@@ -71,6 +71,6 @@ public class InstrumentedTest {
                 count.countDown();
             }
         });
-        count.await();
+        count.await(1, TimeUnit.MINUTES);
     }
 }
